@@ -12,7 +12,7 @@ export type Product = {
   images: string[];
 };
 
-type Answer = {
+export type ProductInfo = {
   limit: number;
   skip: number;
   total: number;
