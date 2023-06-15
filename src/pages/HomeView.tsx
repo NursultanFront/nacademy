@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux-hooks/redux-hooks';
 import { fetchProducts, sortByName, sortByPrice } from '../store/productSlice';
+import { addToCart } from '../store/cartSlice';
+import { Link } from 'react-router-dom';
+import { Route } from '../router/route';
 
 const HomeView = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +19,9 @@ const HomeView = () => {
 
   return (
     <div>
+      <div>
+        <Link to={Route.COURT}>Cart</Link>
+      </div>
       <button
         onClick={() => {
           dispatch(sortByName({ order: 'asc' }));
@@ -54,6 +60,13 @@ const HomeView = () => {
               <div>{item.title}</div>
               <img src={item.thumbnail} alt="" />
               <div>{item.price}</div>
+              <button
+                onClick={() => {
+                  dispatch(addToCart(item));
+                }}
+              >
+                Add to the Cart
+              </button>
             </li>
           );
         })}

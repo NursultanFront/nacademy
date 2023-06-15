@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import App from '../App';
 import HomeView from '../pages/HomeView';
 import { store } from '../store';
+import TheCart from '../pages/TheCart';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
           {
             path: '/',
             element: <HomeView />,
+          },
+          {
+            path: 'cart',
+            element: <TheCart />,
           },
         ],
       },

@@ -1,9 +1,32 @@
-import React from 'react';
+import { useAppDispatch, useAppSelector } from '../redux-hooks/redux-hooks';
+import { clearCart } from '../store/cartSlice';
 
-type Props = {};
+const TheCart = () => {
+  const dispatch = useAppDispatch();
+  const { cart } = useAppSelector((store) => store.cart);
 
-const TheCart = (props: Props) => {
-  return <div>TheCart</div>;
+  return (
+    <div>
+      <ul>
+        <button
+          onClick={() => {
+            dispatch(clearCart());
+          }}
+        >
+          Clear
+        </button>
+        {cart.map((item) => {
+          return (
+            <li key={item.id}>
+              <div>{item.title}</div>
+              <img src={item.thumbnail} alt="" />
+              <div>{item.price}</div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 };
 
 export default TheCart;
