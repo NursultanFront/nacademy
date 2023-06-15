@@ -11,3 +11,10 @@ export type Product = {
   thumbnail: string;
   images: string[];
 };
+
+type Answer = {
+  limit: number;
+  skip: number;
+  total: number;
+  products: Product[];
+};

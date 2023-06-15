@@ -1,5 +1,5 @@
 import { type AxiosInstance } from 'axios';
-import { type Product } from './types';
+import type { ProductInfo, Product } from './types';
 import { BasicRest } from '../basic-rest';
 
 export default class ProductRest extends BasicRest {
@@ -10,7 +10,7 @@ export default class ProductRest extends BasicRest {
   }
 
   public list() {
-    return this.getRequest<Product[]>(this.urlName);
+    return this.getRequest<ProductInfo>(this.urlName);
   }
 
   public getOneProduct(id: number) {

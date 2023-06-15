@@ -17,7 +17,7 @@ interface SortPayload {
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   try {
     const response = await api.product.list();
-    return response;
+    return response.products;
   } catch (error) {
     throw new Error('Failed to fetch products.');
   }
