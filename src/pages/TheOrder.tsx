@@ -1,9 +1,14 @@
 import React from 'react';
+import PaymentForm from '../components/CreditCard';
 
-type Props = {};
+// type Props = {};
 
-const TheOrder = (props: Props) => {
-  return <div>TheOrder</div>;
+const TheOrder = () => {
+  return (
+    <div>
+      <PaymentForm></PaymentForm>
+    </div>
+  );
 };
 
 export default TheOrder;
