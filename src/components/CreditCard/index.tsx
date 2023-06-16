@@ -23,11 +23,44 @@ const PaymentForm = () => {
       <Cards number={state.number} expiry={state.expiry} cvc={state.cvc} name={state.name} />
       <form>
         <input
-          type="number"
+          type="tel"
           name="number"
           placeholder="Card Number"
           value={state.number}
           pattern="[\d| ]{16,22}"
+          maxLength={19}
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+        />
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          pattern="[a-z A-Z-]+"
+          maxLength={20}
+          required
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+        />
+
+        <input
+          type="tel"
+          name="expiry"
+          placeholder="Valid Thru"
+          pattern="\d\d/\d\d"
+          maxLength={4}
+          required
+          onChange={handleInputChange}
+          onFocus={handleInputFocus}
+        />
+
+        <input
+          type="tel"
+          name="cvc"
+          placeholder="CVC"
+          pattern="\d{3}"
+          required
+          maxLength={3}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
         />

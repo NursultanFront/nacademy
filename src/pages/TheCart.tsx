@@ -17,10 +17,11 @@ const TheCart = () => {
         </button>
         {cart.map((item) => {
           return (
-            <li key={item.id}>
-              <div>{item.title}</div>
-              <img src={item.thumbnail} alt="" />
-              <div>{item.price}</div>
+            <li key={item.product.id}>
+              <div>{item.product.title}</div>
+              <img src={item.product.thumbnail} alt="" />
+              <div>{item.product.price}</div>
+              <p>currently - {item.quantity}</p>
             </li>
           );
         })}
