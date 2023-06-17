@@ -8,9 +8,9 @@ interface ProductsState {
   error: string | null;
 }
 
-type SortOrder = 'asc' | 'desc';
+export type SortOrder = 'asc' | 'desc';
 
-interface SortPayload {
+export interface SortPayload {
   order: SortOrder;
 }
 

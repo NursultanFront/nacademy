@@ -1,9 +1,31 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../redux-hooks/redux-hooks';
-import { fetchProducts, sortByName, sortByPrice } from '../store/productSlice';
-import { addToCart } from '../store/cartSlice';
+import {
+  SortOrder,
+  SortPayload,
+  fetchProducts,
+  sortByName,
+  sortByPrice,
+} from '../store/productSlice';
 import { Link } from 'react-router-dom';
 import { Route } from '../router/route';
+import Grid from '@mui/material/Grid';
+import CardItem from '../components/CardItem/CardItem';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
+interface ButtonFilter {
+  id: number;
+  order: SortOrder;
+  title: string;
+  method: ActionCreatorWithPayload<SortPayload>;
+}
+
+const buttonFilter: ButtonFilter[] = [
+  { id: 1, order: 'asc', title: 'Имя по возрастанию', method: sortByName },
+  { id: 2, order: 'desc', title: 'Имя по убыванию', method: sortByName },
+  { id: 3, order: 'asc', title: 'Цена по возрастанию', method: sortByPrice },
+  { id: 4, order: 'desc', title: 'Цена по убыванию', method: sortByPrice },
+];
 
 const HomeView = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +36,7 @@ const HomeView = () => {
   }, [dispatch]);
 
   if (product.loading) {
-    <p>Loading</p>;
+    return <p>Loading</p>;
   }
 
   return (
@@ -22,55 +44,21 @@ const HomeView = () => {
       <div>
         <Link to={Route.COURT}>Cart</Link>
       </div>
-      <button
-        onClick={() => {
-          dispatch(sortByName({ order: 'asc' }));
-        }}
-      >
-        по имени вверх
-      </button>
-      <button
-        onClick={() => {
-          dispatch(sortByName({ order: 'desc' }));
-        }}
-      >
-        по имени вниз
-      </button>
-
-      <button
-        onClick={() => {
-          dispatch(sortByPrice({ order: 'desc' }));
-        }}
-      >
-        по Цене вниз
-      </button>
-
-      <button
-        onClick={() => {
-          dispatch(sortByPrice({ order: 'asc' }));
-        }}
-      >
-        по Цене вверх
-      </button>
-
-      <ul>
-        {product.data.map((item) => {
+      <div>
+        {buttonFilter.map((item) => {
           return (
-            <li key={item.id}>
-              <div>{item.title}</div>
-              <img src={item.thumbnail} alt="" />
-              <div>{item.price}</div>
-              <button
-                onClick={() => {
-                  dispatch(addToCart(item));
-                }}
-              >
-                Add to the Cart
-              </button>
-            </li>
+            <button key={item.id} onClick={() => dispatch(item.method({ order: item.order }))}>
+              {item.title}
+            </button>
           );
         })}
-      </ul>
+      </div>
+
+      <Grid container spacing={2} columns={{ xs: 1, sm: 8, md: 12 }}>
+        {product.data.map((item) => {
+          return <CardItem key={item.id} card={item}></CardItem>;
+        })}
+      </Grid>
     </div>
   );
 };
