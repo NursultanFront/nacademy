@@ -1,0 +1,14 @@
+.home {
+  &__btn-wrapper {
+    margin: 0 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+
+    @media (max-width: 455px) {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+}

@@ -13,6 +13,8 @@ import Grid from '@mui/material/Grid';
 import CardItem from '../../components/CardItem/CardItem';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
+import './HomeView.scss';
+
 interface ButtonFilter {
   id: number;
   order: SortOrder;
@@ -44,7 +46,7 @@ const HomeView = () => {
       <div>
         <Link to={Route.COURT}>Cart</Link>
       </div>
-      <div>
+      <div className="home__btn-wrapper">
         {buttonFilter.map((item) => {
           return (
             <button key={item.id} onClick={() => dispatch(item.method({ order: item.order }))}>
