@@ -8,74 +8,7 @@ type Props = {
   setCard: Dispatch<SetStateAction<Card>>;
 };
 
-// const PaymentForm = ({ card, setCard }: Props) => {
-//   const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = evt.target;
-//     setCard((prev) => ({ ...prev, [name]: value }));
-//   };
-
-//   const handleInputFocus = (evt: React.FocusEvent<HTMLInputElement>) => {
-//     setCard((prev) => ({ ...prev, focus: evt.target.name }));
-//   };
-
-//   return (
-//     <div>
-//       <Cards number={card.number} expiry={card.expiry} cvc={card.cvc} name={card.name} />
-//       <form>
-//         <input
-//           type="tel"
-//           name="number"
-//           placeholder="Card Number"
-//           value={card.number}
-//           maxLength={19}
-//           onChange={handleInputChange}
-//           onFocus={handleInputFocus}
-//         />
-//         <input
-//           type="text"
-//           name="name"
-//           placeholder="Name"
-//           maxLength={20}
-//           value={card.name}
-//           required
-//           onChange={handleInputChange}
-//           onFocus={handleInputFocus}
-//         />
-
-//         <input
-//           type="tel"
-//           name="expiry"
-//           placeholder="Valid Thru"
-//           maxLength={4}
-//           required
-//           value={card.expiry}
-//           onChange={handleInputChange}
-//           onFocus={handleInputFocus}
-//         />
-
-//         <input
-//           type="tel"
-//           name="cvc"
-//           placeholder="CVC"
-//           required
-//           value={card.cvc}
-//           maxLength={3}
-//           onChange={handleInputChange}
-//           onFocus={handleInputFocus}
-//         />
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default PaymentForm;
-
 const PaymentForm = ({ card, setCard }: Props) => {
-  const handleInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = evt.target;
-    setCard((prev) => ({ ...prev, [name]: value }));
-  };
-
   const handleInputFocus = (evt: React.FocusEvent<HTMLInputElement>) => {
     setCard((prev) => ({ ...prev, focus: evt.target.name }));
   };
