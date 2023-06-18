@@ -2,4 +2,13 @@
   display: flex;
   justify-content: space-between;
   margin: 0 0 20px;
+
+  button {
+    padding: 0;
+  }
+
+  a {
+    display: flex;
+    padding: 10px 20px;
+  }
 }
