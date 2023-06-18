@@ -8,4 +8,16 @@
     z-index: 1200;
     cursor: grab;
   }
+
+  &__search {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      padding: 10px;
+    }
+  }
 }

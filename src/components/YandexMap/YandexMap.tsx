@@ -1,8 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { GeolocationControl, Map, ZoomControl, YMaps } from 'react-yandex-maps';
 import LocationImage from '../../assets/location.png';
-import './YandexMap.scss';
+
 import { Aderss } from '../../pages/TheOrder/TheOrder';
+
+import '../../assets/input.scss';
+import './YandexMap.scss';
 
 interface State {
   title: string;
@@ -80,34 +83,107 @@ export default function YMapsTest({ adress, setAdress }: Props) {
   };
 
   return (
+    // <>
+    //   <h2>{state.title}</h2>
+    //   <input
+    //     type="text"
+    //     placeholder="Город"
+    //     value={adress.city}
+    //     onChange={(e) => setAdress({ ...adress, city: e.target.value })}
+    //   />
+
+    //   <input
+    //     type="text"
+    //     placeholder="Улица"
+    //     value={adress.street}
+    //     onChange={(e) => setAdress({ ...adress, street: e.target.value })}
+    //   />
+
+    //   <input
+    //     type="text"
+    //     placeholder="Номер дома"
+    //     value={adress.home}
+    //     onChange={(e) => setAdress({ ...adress, home: e.target.value })}
+    //   />
+    //   <div className="map">
+    //     <YMaps query={{ apikey: 'f80bf96b-8fa3-4478-ac9a-39e597b9757a' }}>
+    //       <input ref={searchRef} placeholder="Search..." disabled={!mapConstructor} />
+    //       <button onClick={handleSubmit} disabled={Boolean(!state.title.length)}>
+    //         Подтведить адресс
+    //       </button>
+
+    //       <Map
+    //         {...mapOptions}
+    //         state={state}
+    //         // @ts-ignore
+    //         onLoad={setMapConstructor}
+    //         onBoundsChange={handleBoundsChange}
+    //         // @ts-ignore
+    //         instanceRef={mapRef}
+    //       >
+    //         <GeolocationControl {...geolocationOptions} />
+    //         <ZoomControl />
+    //       </Map>
+    //       <img src={LocationImage} className="map__location" alt="Локация" />
+    //     </YMaps>
+    //   </div>
+    // </>
     <>
-      <h2>{state.title}</h2>
-      <input
-        type="text"
-        placeholder="Город"
-        value={adress.city}
-        onChange={(e) => setAdress({ ...adress, city: e.target.value })}
-      />
+      <div className="input__wrapper">
+        <div className="input__item">
+          <label htmlFor="city">Город</label>
+          <input
+            type="text"
+            id="city"
+            placeholder="Город"
+            value={adress.city}
+            onChange={(e) => setAdress({ ...adress, city: e.target.value })}
+          />
+        </div>
 
-      <input
-        type="text"
-        placeholder="Улица"
-        value={adress.street}
-        onChange={(e) => setAdress({ ...adress, street: e.target.value })}
-      />
+        <div className="input__item">
+          <label htmlFor="street">Улица</label>
+          <input
+            type="text"
+            id="street"
+            placeholder="Улица"
+            value={adress.street}
+            onChange={(e) => setAdress({ ...adress, street: e.target.value })}
+          />
+        </div>
 
-      <input
-        type="text"
-        placeholder="Номер дома"
-        value={adress.home}
-        onChange={(e) => setAdress({ ...adress, home: e.target.value })}
-      />
+        <div className="input__item">
+          <label htmlFor="home">Номер дома</label>
+          <input
+            type="text"
+            id="home"
+            placeholder="Номер дома"
+            value={adress.home}
+            onChange={(e) => setAdress({ ...adress, home: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className="center">
+        <h2>Ваш адресс: {state.title}</h2>
+
+        <button onClick={handleSubmit} disabled={Boolean(!state.title.length)}>
+          Подтвердить адрес
+        </button>
+      </div>
+
       <div className="map">
         <YMaps query={{ apikey: 'f80bf96b-8fa3-4478-ac9a-39e597b9757a' }}>
-          <input ref={searchRef} placeholder="Search..." disabled={!mapConstructor} />
-          <button onClick={handleSubmit} disabled={Boolean(!state.title.length)}>
-            Подтведить адресс
-          </button>
+          <div className="map__search">
+            <label htmlFor="search">Поиск</label>
+            <input
+              className="map__input"
+              ref={searchRef}
+              id="search"
+              placeholder="Search..."
+              disabled={!mapConstructor}
+            />
+          </div>
 
           <Map
             {...mapOptions}

@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../redux-hooks/redux-hooks';
 import { Aderss, Card, User } from '../TheOrder/TheOrder';
 import { useLocation } from 'react-router-dom';
+import './FinishOrder.scss';
 
 type Props = {
   user: User;
@@ -13,11 +14,9 @@ const FinishOrder = () => {
   const { adress, card, user } = location.state as Props;
   const { totalPrice } = useAppSelector((store) => store.cart);
 
-  console.log(adress);
-
   return (
-    <>
-      <div>
+    <div className="finish">
+      <div className="finish__item">
         <h2>Ваш профиль </h2>
         <div>
           <p>Ваше Имя : {user.firstName}</p>
@@ -26,7 +25,7 @@ const FinishOrder = () => {
         </div>
       </div>
 
-      <div>
+      <div className="finish__item">
         <h2>Ваша карточка</h2>
 
         <div>
@@ -35,17 +34,17 @@ const FinishOrder = () => {
         </div>
       </div>
 
-      <div>
+      <div className="finish__item">
         <h2>Ваша локация</h2>
         <div>
           <p>Ваш город : {adress.city}</p>
           <p>Ваша улица : {adress.street}</p>
-          <p>Ваш номер дома : {adress.city}</p>
+          <p>Ваш номер дома : {adress.home}</p>
         </div>
       </div>
 
-      <div> Итого: {totalPrice}</div>
-    </>
+      <div className="finish__item"> Итого: {totalPrice}</div>
+    </div>
   );
 };
 

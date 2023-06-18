@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import { Card } from '../../pages/TheOrder/TheOrder';
+import '../../assets/input.scss';
 
 type Props = {
   card: Card;
@@ -40,48 +41,62 @@ const PaymentForm = ({ card, setCard }: Props) => {
   return (
     <div>
       <Cards number={card.number} expiry={card.expiry} cvc={card.cvc} name={card.name} />
-      <form>
-        <input
-          type="tel"
-          name="number"
-          placeholder="Card Number"
-          value={card.number}
-          maxLength={19}
-          onChange={handleNumericInputChange}
-          onFocus={handleInputFocus}
-        />
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          maxLength={20}
-          value={card.name}
-          required
-          onChange={handleCardNameChange}
-          onFocus={handleInputFocus}
-        />
-
-        <input
-          type="tel"
-          name="expiry"
-          placeholder="Valid Thru"
-          maxLength={4}
-          required
-          value={card.expiry}
-          onChange={handleNumericInputChange}
-          onFocus={handleInputFocus}
-        />
-
-        <input
-          type="tel"
-          name="cvc"
-          placeholder="CVC"
-          required
-          value={card.cvc}
-          maxLength={3}
-          onChange={handleNumericInputChange}
-          onFocus={handleInputFocus}
-        />
+      <form className="input__wrapper">
+        <div className="input__item">
+          <label htmlFor="number">Номер карты:</label>
+          <input
+            type="tel"
+            id="number"
+            name="number"
+            placeholder="Card Number"
+            value={card.number}
+            maxLength={19}
+            onChange={handleNumericInputChange}
+            onFocus={handleInputFocus}
+          />
+        </div>
+        <div className="input__item">
+          <label htmlFor="name">Имя карты</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Name"
+            maxLength={20}
+            value={card.name}
+            required
+            onChange={handleCardNameChange}
+            onFocus={handleInputFocus}
+          />
+        </div>
+        <div className="input__item">
+          <label htmlFor="expiry">Дата окончания: </label>
+          <input
+            type="tel"
+            id="expiry"
+            name="expiry"
+            placeholder="Valid Thru"
+            maxLength={4}
+            required
+            value={card.expiry}
+            onChange={handleNumericInputChange}
+            onFocus={handleInputFocus}
+          />
+        </div>
+        <div className="input__item">
+          <label htmlFor="cvc">CVC:</label>
+          <input
+            type="tel"
+            id="cvc"
+            name="cvc"
+            placeholder="CVC"
+            required
+            value={card.cvc}
+            maxLength={3}
+            onChange={handleNumericInputChange}
+            onFocus={handleInputFocus}
+          />
+        </div>
       </form>
     </div>
   );

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import CardCredit from '../../components/CreditCard/CreditCard';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import YandexMap from '../../components/YandexMap/YandexMap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './TheOrder.scss';
 
 export type User = {
   firstName: string;
@@ -52,6 +53,7 @@ const TheOrder = () => {
 
   const prevButton = () => {
     setCurrentStep((prev) => prev - 1);
+    setDisable(false);
   };
 
   const finishOrder = () => {
@@ -98,20 +100,22 @@ const TheOrder = () => {
   };
 
   return (
-    <div>
+    <div className="order">
       {renderStepContent()}
-      <button onClick={prevButton} disabled={currentStep === 1}>
-        Предыдущий шаг
-      </button>
-      {!(currentStep === stepComponents.length) ? (
-        <button onClick={nextButton} disabled={isDisable}>
-          Следующий шаг
+      <div className="order__btn">
+        <button onClick={prevButton} disabled={currentStep === 1}>
+          Предыдущий шаг
         </button>
-      ) : (
-        <button onClick={finishOrder} disabled={isDisable}>
-          Завершить заказ
-        </button>
-      )}
+        {!(currentStep === stepComponents.length) ? (
+          <button onClick={nextButton} disabled={isDisable}>
+            Следующий шаг
+          </button>
+        ) : (
+          <button onClick={finishOrder} disabled={isDisable}>
+            Завершить заказ
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -73,3 +73,11 @@ ul,
 li {
   list-style: none;
 }
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}

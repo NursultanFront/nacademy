@@ -1,0 +1,15 @@
+.finish {
+  display: flex;
+  flex-direction: column;
+
+  gap: 25px;
+
+  &__item {
+    padding: 10px;
+    border-bottom: 1px solid rgba(63, 63, 63, 0.5);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
