@@ -48,16 +48,6 @@ export default function YMapsTest({ adress, setAdress }: Props) {
     });
   };
 
-  const handleReset = () => {
-    setState({ ...initialState });
-    // @ts-ignore
-    searchRef.current.value = '';
-    // @ts-ignore
-    mapRef.current.setCenter(initialState.center);
-    // @ts-ignore
-    mapRef.current.setZoom(initialState.zoom);
-  };
-
   useEffect(() => {
     if (mapConstructor) {
       // @ts-ignore
