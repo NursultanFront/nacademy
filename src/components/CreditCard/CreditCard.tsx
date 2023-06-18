@@ -57,7 +57,7 @@ const PaymentForm = ({ card, setCard }: Props) => {
           maxLength={20}
           value={card.name}
           required
-          onChange={handleCardNameChange} // Обработчик изменения названия карты
+          onChange={handleCardNameChange}
           onFocus={handleInputFocus}
         />
 

@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { GeolocationControl, Map, ZoomControl, YMaps } from 'react-yandex-maps';
+import LocationImage from '../../assets/location.png';
+import './YandexMap.scss';
+import { Aderss } from '../../pages/TheOrder/TheOrder';
 
 interface State {
   title: string;
@@ -7,10 +10,15 @@ interface State {
   zoom: number;
 }
 
+type Props = {
+  adress: Aderss;
+  setAdress: Dispatch<SetStateAction<Aderss>>;
+};
+
 const mapOptions = {
   modules: ['geocode', 'SuggestView'],
   defaultOptions: { suppressMapOpenBlock: true },
-  width: 600,
+  width: '100%',
   height: 400,
 };
 
@@ -25,15 +33,19 @@ const initialState = {
   zoom: 12,
 };
 
-export default function YMapsTest() {
+export default function YMapsTest({ adress, setAdress }: Props) {
   const [state, setState] = useState<State>({ ...initialState });
   const [mapConstructor, setMapConstructor] = useState(null);
   const mapRef = useRef(null);
   const searchRef = useRef(null);
 
   const handleSubmit = () => {
-    // @ts-ignore
-    console.log({ title: state.title, center: mapRef.current.getCenter() });
+    const currentAdress = state.title.split(',');
+    setAdress({
+      city: currentAdress[0] ?? '',
+      street: currentAdress[1] ?? '',
+      home: currentAdress[2] ?? '',
+    });
   };
 
   const handleReset = () => {
@@ -68,6 +80,7 @@ export default function YMapsTest() {
     mapConstructor.geocode(newCoords).then((res) => {
       const nearest = res.geoObjects.get(0);
       const foundAddress = nearest.properties.get('text');
+      console.log(foundAddress);
       const [centerX, centerY] = nearest.geometry.getCoordinates();
       const [initialCenterX, initialCenterY] = initialState.center;
       if (centerX !== initialCenterX && centerY !== initialCenterY) {
@@ -79,25 +92,48 @@ export default function YMapsTest() {
   return (
     <>
       <h2>{state.title}</h2>
-      <YMaps query={{ apikey: 'f80bf96b-8fa3-4478-ac9a-39e597b9757a' }}>
-        <input ref={searchRef} placeholder="Search..." disabled={!mapConstructor} />
-        <button onClick={handleSubmit} disabled={Boolean(!state.title.length)}>
-          Ok
-        </button>
+      <input
+        type="text"
+        placeholder="Город"
+        value={adress.city}
+        onChange={(e) => setAdress({ ...adress, city: e.target.value })}
+      />
 
-        <Map
-          {...mapOptions}
-          state={state}
-          // @ts-ignore
-          onLoad={setMapConstructor}
-          onBoundsChange={handleBoundsChange}
-          // @ts-ignore
-          instanceRef={mapRef}
-        >
-          <GeolocationControl {...geolocationOptions} />
-          <ZoomControl />
-        </Map>
-      </YMaps>
+      <input
+        type="text"
+        placeholder="Улица"
+        value={adress.street}
+        onChange={(e) => setAdress({ ...adress, street: e.target.value })}
+      />
+
+      <input
+        type="text"
+        placeholder="Номер дома"
+        value={adress.home}
+        onChange={(e) => setAdress({ ...adress, home: e.target.value })}
+      />
+      <div className="map">
+        <YMaps query={{ apikey: 'f80bf96b-8fa3-4478-ac9a-39e597b9757a' }}>
+          <input ref={searchRef} placeholder="Search..." disabled={!mapConstructor} />
+          <button onClick={handleSubmit} disabled={Boolean(!state.title.length)}>
+            Подтведить адресс
+          </button>
+
+          <Map
+            {...mapOptions}
+            state={state}
+            // @ts-ignore
+            onLoad={setMapConstructor}
+            onBoundsChange={handleBoundsChange}
+            // @ts-ignore
+            instanceRef={mapRef}
+          >
+            <GeolocationControl {...geolocationOptions} />
+            <ZoomControl />
+          </Map>
+          <img src={LocationImage} className="map__location" alt="" />
+        </YMaps>
+      </div>
     </>
   );
 }

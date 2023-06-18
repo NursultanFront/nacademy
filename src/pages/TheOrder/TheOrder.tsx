@@ -15,6 +15,14 @@ export type Card = {
   name: string;
 };
 
+export type Aderss = {
+  city: string;
+  street: string;
+  home: string;
+};
+
+const stepComponents = [UserInfo, CardCredit, YandexMap];
+
 const TheOrder = () => {
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [isDisable, setDisable] = useState<boolean>(true);
@@ -26,8 +34,17 @@ const TheOrder = () => {
 
   const [card, setCard] = useState<Card>({ number: '', expiry: '', cvc: '', name: '' });
 
+  const [adress, setAdress] = useState({
+    city: '',
+    street: '',
+    home: '',
+  });
+
   const nextButton = () => {
     setCurrentStep((prev) => prev + 1);
+    if (!isDisable) {
+      setDisable(true);
+    }
   };
 
   const prevButton = () => {
@@ -37,8 +54,6 @@ const TheOrder = () => {
   useEffect(() => {
     if (user.firstName.trim() !== '' && user.lastName.trim() !== '') {
       setDisable(false);
-    } else {
-      setDisable(true);
     }
   }, [user]);
 
@@ -53,10 +68,14 @@ const TheOrder = () => {
       card.number.length >= 16
     ) {
       setDisable(false);
-    } else {
-      setDisable(true);
     }
   }, [card]);
+
+  useEffect(() => {
+    if (adress.city.trim() !== '' && adress.home.trim() !== '' && adress.street.trim() !== '') {
+      setDisable(false);
+    }
+  }, [adress]);
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -65,7 +84,7 @@ const TheOrder = () => {
       case 2:
         return <CardCredit card={card} setCard={setCard} />;
       case 3:
-        return <YandexMap />;
+        return <YandexMap adress={adress} setAdress={setAdress} />;
       default:
         return null;
     }
@@ -74,9 +93,11 @@ const TheOrder = () => {
   return (
     <div>
       {renderStepContent()}
-      <button onClick={prevButton}>Предыдущий шаг</button>
+      <button onClick={prevButton} disabled={currentStep === 1}>
+        Предыдущий шаг
+      </button>
       <button onClick={nextButton} disabled={isDisable}>
-        Следующий шаг
+        {currentStep === stepComponents.length ? 'Завершить заказ' : 'Следующий шаг'}
       </button>
     </div>
   );
