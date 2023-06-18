@@ -49,7 +49,8 @@ const TheOrder = () => {
       card.name.trim() !== '' &&
       card.number.trim() !== '' &&
       card.cvc.length == 3 &&
-      card.expiry.length == 4
+      card.expiry.length == 4 &&
+      card.number.length >= 16
     ) {
       setDisable(false);
     } else {

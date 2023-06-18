@@ -114,7 +114,7 @@ const PaymentForm = ({ card, setCard }: Props) => {
           placeholder="Card Number"
           value={card.number}
           maxLength={19}
-          onChange={handleInputChange}
+          onChange={handleNumericInputChange}
           onFocus={handleInputFocus}
         />
         <input
