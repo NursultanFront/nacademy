@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CardCredit from '../../components/CreditCard/CreditCard';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import YandexMap from '../../components/YandexMap/YandexMap';
+import { Link, useNavigate } from 'react-router-dom';
 
 export type User = {
   firstName: string;
@@ -40,6 +41,8 @@ const TheOrder = () => {
     home: '',
   });
 
+  const navigate = useNavigate();
+
   const nextButton = () => {
     setCurrentStep((prev) => prev + 1);
     if (!isDisable) {
@@ -49,6 +52,10 @@ const TheOrder = () => {
 
   const prevButton = () => {
     setCurrentStep((prev) => prev - 1);
+  };
+
+  const finishOrder = () => {
+    navigate('/finish-order', { state: { adress, user, card } });
   };
 
   useEffect(() => {
@@ -101,7 +108,9 @@ const TheOrder = () => {
           Следующий шаг
         </button>
       ) : (
-        <button>Завершить заказ</button>
+        <button onClick={finishOrder} disabled={isDisable}>
+          Завершить заказ
+        </button>
       )}
     </div>
   );

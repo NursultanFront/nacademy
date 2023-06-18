@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Product } from '../../api/product/types';
 import { useAppDispatch, useAppSelector } from '../../redux-hooks/redux-hooks';
 import { addToCart, removeFromCart } from '../../store/cartSlice';
@@ -7,6 +8,7 @@ import './Cart.scss';
 const TheCart = () => {
   const dispatch = useAppDispatch();
   const { cart, totalPrice } = useAppSelector((store) => store.cart);
+  const navigate = useNavigate();
 
   const addProduct = (value: Product) => {
     dispatch(addToCart(value));
@@ -62,7 +64,7 @@ const TheCart = () => {
               <h2>Итого</h2>
               <p>Общая цена: {totalPrice}</p>
             </div>
-            <button>Оплата</button>
+            <button onClick={() => navigate('/order')}>Оплата</button>
           </div>
         )}
       </div>

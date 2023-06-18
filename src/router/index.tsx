@@ -6,6 +6,7 @@ import { store } from '../store';
 import TheCart from '../pages/TheCart/TheCart';
 import TheOrder from '../pages/TheOrder/TheOrder';
 import NotFound from '../pages/NotFound/NotFound';
+import FinishOrder from '../pages/FinishOrder/FinishOrder';
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             element: <TheOrder />,
           },
           {
+            path: '/finish-order',
+            element: <FinishOrder />,
+          },
+          {
             path: '*',
             element: <NotFound />,
           },
@@ -40,5 +45,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // { path: '*', element: <NotFound></NotFound> },
 ]);
