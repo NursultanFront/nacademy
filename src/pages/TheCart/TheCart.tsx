@@ -24,6 +24,7 @@ const TheCart = () => {
           onClick={() => {
             dispatch(clearCart());
           }}
+          disabled={cart.length == 0}
         >
           Очистить
         </button>
