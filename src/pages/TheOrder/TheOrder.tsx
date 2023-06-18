@@ -1,5 +1,5 @@
-import PaymentForm from '../components/CreditCard/CreditCard';
-import OrderFormStepThree from '../components/YandexMap/YandexMap';
+import PaymentForm from '../../components/CreditCard/CreditCard';
+import OrderFormStepThree from '../../components/YandexMap/YandexMap';
 
 // type Props = {};
 

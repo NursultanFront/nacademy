@@ -1,10 +1,10 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from '../App';
-import HomeView from '../pages/HomeView';
+import HomeView from '../pages/HomeView/HomeView';
 import { store } from '../store';
-import TheCart from '../pages/TheCart';
-import TheOrder from '../pages/TheOrder';
+import TheCart from '../pages/TheCart/TheCart';
+import TheOrder from '../pages/TheOrder/TheOrder';
 
 export const router = createBrowserRouter([
   {
