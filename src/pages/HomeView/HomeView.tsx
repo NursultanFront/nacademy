@@ -43,9 +43,6 @@ const HomeView = () => {
 
   return (
     <div>
-      <div>
-        <Link to={Route.COURT}>Cart</Link>
-      </div>
       <div className="home__btn-wrapper">
         {buttonFilter.map((item) => {
           return (
