@@ -9,7 +9,7 @@ const TheHeader = () => {
         <Link to={Route.HOME}>Home</Link>
       </button>
       <button>
-        <Link to={Route.COURT}>Court</Link>
+        <Link to={Route.COURT}>Корзина</Link>
       </button>
     </header>
   );

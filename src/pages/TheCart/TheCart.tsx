@@ -8,6 +8,10 @@ const TheCart = () => {
   const dispatch = useAppDispatch();
   const { cart } = useAppSelector((store) => store.cart);
 
+  const totalPrice = cart.reduce((total, item) => {
+    return total + item.product.price * item.quantity;
+  }, 0);
+
   const addProduct = (value: Product) => {
     dispatch(addToCart(value));
   };
@@ -19,29 +23,52 @@ const TheCart = () => {
   return (
     <div>
       <div className="cart-page__title">
-        <h2>Shopping Cart</h2>
+        <h2>Корзина</h2>
         <button
           onClick={() => {
             dispatch(clearCart());
           }}
         >
-          Clear
+          Очистить
         </button>
       </div>
-      <ul>
-        {cart.map((item) => {
-          return (
-            <li className="cart__item" key={item.product.id}>
-              <div>{item.product.title}</div>
-              <img src={item.product.thumbnail} width={50} height={50} alt="" />
-              <div>{item.product.price}</div>
-              <button onClick={() => removeProduct(item.product)}>-</button>
-              <p>{item.quantity}</p>
-              <button onClick={() => addProduct(item.product)}>+</button>
-            </li>
-          );
-        })}
-      </ul>
+      <div className="cart__wrapper">
+        {cart.length >= 1 ? (
+          <ul className="cart__shop">
+            {cart.map((item) => {
+              return (
+                <li className="cart__item" key={item.product.id}>
+                  <img
+                    className="cart__img"
+                    src={item.product.thumbnail}
+                    width={50}
+                    height={50}
+                    alt=""
+                  />
+                  <div className="cart__title">Название: {item.product.title}</div>
+                  <div className="cart__price">Цена: {item.product.price}</div>
+                  <div className="cart__btn">
+                    <button onClick={() => removeProduct(item.product)}>-</button>
+                    <p>{item.quantity}</p>
+                    <button onClick={() => addProduct(item.product)}>+</button>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <h2>Здесь ничего нет, пожалуйста добавьте товары</h2>
+        )}
+        {cart.length >= 1 && (
+          <div className="cart__summary">
+            <div>
+              <h2>Итого</h2>
+              <p>Общая цена: {totalPrice}</p>
+            </div>
+            <button>Оплата</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
