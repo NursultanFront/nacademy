@@ -7,8 +7,6 @@ import {
   sortByName,
   sortByPrice,
 } from '../../store/productSlice';
-import { Link } from 'react-router-dom';
-import { Route } from '../../router/route';
 import Grid from '@mui/material/Grid';
 import CardItem from '../../components/CardItem/CardItem';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';

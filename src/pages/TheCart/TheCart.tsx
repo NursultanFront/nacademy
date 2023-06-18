@@ -43,7 +43,7 @@ const TheCart = () => {
                     src={item.product.thumbnail}
                     width={50}
                     height={50}
-                    alt=""
+                    alt="Продукт"
                   />
                   <div className="cart__title">Название: {item.product.title}</div>
                   <div className="cart__price">Цена: {item.product.price}</div>

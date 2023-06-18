@@ -63,7 +63,7 @@ export default function YMapsTest({ adress, setAdress }: Props) {
   }, [mapConstructor]);
 
   // @ts-ignore
-  const handleBoundsChange = (e) => {
+  const handleBoundsChange = () => {
     // @ts-ignore
     const newCoords = mapRef.current.getCenter();
     // @ts-ignore
@@ -121,7 +121,7 @@ export default function YMapsTest({ adress, setAdress }: Props) {
             <GeolocationControl {...geolocationOptions} />
             <ZoomControl />
           </Map>
-          <img src={LocationImage} className="map__location" alt="" />
+          <img src={LocationImage} className="map__location" alt="Локация" />
         </YMaps>
       </div>
     </>

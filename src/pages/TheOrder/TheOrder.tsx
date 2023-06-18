@@ -96,9 +96,13 @@ const TheOrder = () => {
       <button onClick={prevButton} disabled={currentStep === 1}>
         Предыдущий шаг
       </button>
-      <button onClick={nextButton} disabled={isDisable}>
-        {currentStep === stepComponents.length ? 'Завершить заказ' : 'Следующий шаг'}
-      </button>
+      {!(currentStep === stepComponents.length) ? (
+        <button onClick={nextButton} disabled={isDisable}>
+          Следующий шаг
+        </button>
+      ) : (
+        <button>Завершить заказ</button>
+      )}
     </div>
   );
 };
