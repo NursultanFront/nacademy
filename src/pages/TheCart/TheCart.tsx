@@ -6,11 +6,7 @@ import './Cart.scss';
 
 const TheCart = () => {
   const dispatch = useAppDispatch();
-  const { cart } = useAppSelector((store) => store.cart);
-
-  const totalPrice = cart.reduce((total, item) => {
-    return total + item.product.price * item.quantity;
-  }, 0);
+  const { cart, totalPrice } = useAppSelector((store) => store.cart);
 
   const addProduct = (value: Product) => {
     dispatch(addToCart(value));

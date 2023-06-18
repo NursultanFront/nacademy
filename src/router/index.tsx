@@ -5,6 +5,7 @@ import HomeView from '../pages/HomeView/HomeView';
 import { store } from '../store';
 import TheCart from '../pages/TheCart/TheCart';
 import TheOrder from '../pages/TheOrder/TheOrder';
+import NotFound from '../pages/NotFound/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
           {
             path: '/order',
             element: <TheOrder />,
+          },
+          {
+            path: '*',
+            element: <NotFound />,
           },
         ],
       },

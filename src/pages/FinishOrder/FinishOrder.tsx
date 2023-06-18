@@ -1,4 +1,5 @@
-import { Aderss, Card, User } from '../../pages/TheOrder/TheOrder';
+import { useAppSelector } from '../../redux-hooks/redux-hooks';
+import { Aderss, Card, User } from '../TheOrder/TheOrder';
 
 type Props = {
   user: User;
@@ -7,6 +8,7 @@ type Props = {
 };
 
 const FinishOrder = ({ address, card, user }: Props) => {
+  const { totalPrice } = useAppSelector((store) => store.cart);
   return (
     <>
       <div>
@@ -35,6 +37,8 @@ const FinishOrder = ({ address, card, user }: Props) => {
           <p>Ваш номер дома : {address.city}</p>
         </div>
       </div>
+
+      <div> Итого: {totalPrice}</div>
     </>
   );
 };

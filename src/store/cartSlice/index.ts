@@ -8,10 +8,12 @@ interface CartItem {
 
 interface CartState {
   cart: CartItem[];
+  totalPrice: number;
 }
 
 const initialState: CartState = {
   cart: [],
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -26,6 +28,8 @@ const cartSlice = createSlice({
       } else {
         state.cart.push({ product: action.payload, quantity: 1 });
       }
+
+      state.totalPrice += action.payload.price;
     },
     removeFromCart: (state, action: PayloadAction<Product>) => {
       const productId = action.payload.id;
@@ -37,19 +41,15 @@ const cartSlice = createSlice({
           state.cart = state.cart.filter((item) => item.product.id !== productId);
         }
       }
+      state.totalPrice -= action.payload.price;
     },
-    updateQuantity: (state, action: PayloadAction<{ productId: number; quantity: number }>) => {
-      const { productId, quantity } = action.payload;
-      const existingItem = state.cart.find((item) => item.product.id === productId);
-      if (existingItem) {
-        existingItem.quantity = quantity;
-      }
-    },
+
     clearCart: (state) => {
       state.cart = [];
+      state.totalPrice = 0;
     },
   },
 });
 
-export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
