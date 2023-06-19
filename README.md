@@ -17,4 +17,4 @@ yarn  <br>
 yarn dev
 
 ## Deploy
-https://app.netlify.com/sites/tubular-nasturtium-ceb456/deploys/648f7010c41d516a1259ba98
+https://648f7010c41d516a1259ba98--tubular-nasturtium-ceb456.netlify.app/
